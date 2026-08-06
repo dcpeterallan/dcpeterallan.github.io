@@ -1,0 +1,1 @@
+GitHub Pages redeployment trigger created on 2026-08-07 after the site was unpublished. Publishing source: main branch, repository root.
