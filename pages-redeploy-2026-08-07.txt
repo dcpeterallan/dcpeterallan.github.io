@@ -1,1 +1,3 @@
 GitHub Pages redeployment trigger created on 2026-08-07 after the site was unpublished. Publishing source: main branch, repository root.
+
+Fresh post-incident deployment trigger: 2026-08-07 11:44 +03:00. GitHub Status reported the Actions incident resolved at 02:04 UTC; this commit is intentionally created after recovery so Pages can process a new branch-publish event.
