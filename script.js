@@ -5,20 +5,38 @@ const recentProjects = [
     location: "Dammam, SPARK, Saudi Arabia",
     role: "Lead Architecture & BIM Delivery",
     status: "Detailed design development",
+    portfolioLabel: "Selected Technical Drawings",
     thumbnail: "https://raw.githubusercontent.com/dcpeterallan/Architectural-Portfolio/main/assets/projects/ebara-elliott/perspective.jpg",
     description: [
       "EBARA Elliott Energy (EEE) is a global provider of advanced turbomachinery and energy solutions serving the oil and gas, petrochemical, refining, and power generation industries. The company designs, manufactures, and services technologically advanced equipment such as centrifugal and axial compressors, steam turbines, power recovery expanders, custom pumps, and cryogenic systems used in large-scale industrial facilities worldwide.",
       "EEE is part of EBARA Corporation, a Japanese multinational engineering company founded in 1912 that specializes in industrial machinery, pumps, and environmental and energy technologies.",
       "To strengthen its presence in the Middle East and support the region’s growing energy sector, EBARA Elliott Energy is expanding its operational capabilities in Saudi Arabia by establishing advanced facilities dedicated to turbomachinery packaging, testing, service, and maintenance."
     ],
-    scope: ["Master planning", "Architectural design", "Revit / BIM coordination", "Detailed design development", "Complete architectural drawings", "Authority coordination"],
+    scope: ["Master planning", "Architectural design", "Revit / BIM coordination", "Detailed design development", "Selected architectural drawing samples", "Authority coordination"],
     media: [
       { title: "Revit Model Screenshot", src: "https://raw.githubusercontent.com/dcpeterallan/Architectural-Portfolio/main/assets/projects/ebara-elliott/revit.jpg" },
       { title: "Perspective View", src: "https://raw.githubusercontent.com/dcpeterallan/Architectural-Portfolio/main/assets/projects/ebara-elliott/perspective.jpg" }
     ],
-    documents: [
-      { title: "Office Building – Complete Architectural Drawings", href: "https://raw.githubusercontent.com/dcpeterallan/Architectural-Portfolio/main/assets/projects/ebara-elliott/office-building-complete-architectural-drawings.pdf" },
-      { title: "Production Building – Complete Architectural Drawings", href: "https://raw.githubusercontent.com/dcpeterallan/Architectural-Portfolio/main/assets/projects/ebara-elliott/production-building-complete-architectural-drawings.pdf" }
+    drawingNote: "Only the selected Office and Production Building sheets approved for portfolio presentation are shown here. They are representative excerpts from the larger architectural drawing packages and are not presented as the complete project drawing sets.",
+    drawingGroups: [
+      {
+        title: "Office Building",
+        sheets: [
+          { title: "Ground and First Floor Plan", drawingNo: "GC-EB-SP-DRW-OFA-ARC-20001", preview: "assets/projects/ebara-elliott/drawing-preview/office/ground-first-floor-plan.webp" },
+          { title: "Building Elevations 01/02", drawingNo: "GC-EB-SP-DRW-OFA-ARC-20007", preview: "assets/projects/ebara-elliott/drawing-preview/office/building-elevations-01-02.webp" },
+          { title: "Building Sections", drawingNo: "GC-EB-SP-DRW-OFA-ARC-20009", preview: "assets/projects/ebara-elliott/drawing-preview/office/building-sections.webp" },
+          { title: "Wall Sections", drawingNo: "GC-EB-SP-DRW-OFA-ARC-20013", preview: "assets/projects/ebara-elliott/drawing-preview/office/wall-sections.webp" }
+        ]
+      },
+      {
+        title: "Production Building",
+        sheets: [
+          { title: "Equipment Layout Plan", drawingNo: "GC-EB-SP-DRW-PDB-ARC-10004", preview: "assets/projects/ebara-elliott/drawing-preview/production/equipment-layout-plan.webp" },
+          { title: "Building Elevation 1/2", drawingNo: "GC-EB-SP-DRW-PDB-ARC-10005", preview: "assets/projects/ebara-elliott/drawing-preview/production/building-elevation-1-2.webp" },
+          { title: "Building Section", drawingNo: "GC-EB-SP-DRW-PDB-ARC-10007", preview: "assets/projects/ebara-elliott/drawing-preview/production/building-section.webp" },
+          { title: "Wall Sections", drawingNo: "GC-EB-SP-DRW-PDB-ARC-10008", preview: "assets/projects/ebara-elliott/drawing-preview/production/wall-sections.webp" }
+        ]
+      }
     ]
   },
   {
@@ -27,6 +45,7 @@ const recentProjects = [
     location: "Asir, Saudi Arabia",
     role: "Lead Architect / BIM Coordinator",
     status: "LOD 400",
+    portfolioLabel: "LOD 400 · Selected Samples",
     thumbnail: "assets/projects/nupco/perspective.jpg",
     description: [
       "NUPCO Pharmaceutical Warehouse and Office is a strategic logistics and pharmaceutical development located within the new MODON Industrial Park in Asir, Saudi Arabia. The project is intended to serve as a benchmark for pharmaceutical warehouse facilities in the Kingdom while reflecting NUPCO’s corporate identity, operational requirements, and organizational culture.",
@@ -48,6 +67,7 @@ const recentProjects = [
       { title: "Navisworks Coordination View 02", src: "assets/projects/nupco/navisworks-02.jpg" },
       { title: "Navisworks Coordination View 03", src: "assets/projects/nupco/navisworks-03.jpg" }
     ],
+    drawingNote: "Selected sample sheets from the larger LOD 400 architectural drawing package. These are representative portfolio excerpts and are not presented as the complete project drawing set.",
     drawingGroups: [
       {
         title: "Selected Floor Plans",
@@ -143,7 +163,13 @@ function factMarkup(project) {
 
 function drawingGroupsMarkup(project) {
   if (!project.drawingGroups?.length) return "";
-  return `<section class="drawing-section"><p class="eyebrow">Selected architectural drawings</p><p class="drawing-note">Selected sample sheets from the larger LOD 400 architectural drawing package. These are representative portfolio excerpts and are not presented as the complete project drawing set.</p><div class="drawing-groups">${project.drawingGroups.map(group => `<article><h3>${group.title}</h3><ul>${group.sheets.map(sheet => `<li><a href="${encodeURI(sheet.href)}" target="_blank" rel="noopener noreferrer"><span>${sheet.title}</span><em>View PDF ↗</em></a></li>`).join("")}</ul></article>`).join("")}</div></section>`;
+  const note = project.drawingNote || "Selected portfolio drawing samples. These are representative excerpts and are not presented as the complete project drawing set.";
+  return `<section class="drawing-section"><p class="eyebrow">Selected architectural drawings</p><p class="drawing-note">${note}</p><div class="drawing-groups">${project.drawingGroups.map(group => `<article><h3>${group.title}</h3><ul>${group.sheets.map(sheet => {
+    const href = sheet.preview || sheet.href || "#";
+    const preview = sheet.preview ? ` data-preview="${encodeURI(sheet.preview)}"` : "";
+    const drawingNo = sheet.drawingNo ? ` data-drawing-no="${sheet.drawingNo}"` : "";
+    return `<li><a href="${encodeURI(href)}"${preview}${drawingNo}><span>${sheet.title}</span><em>View drawing ↗</em></a></li>`;
+  }).join("")}</ul></article>`).join("")}</div></section>`;
 }
 
 function openProject(project) {
@@ -157,7 +183,8 @@ function openProject(project) {
     ? `<div class="document-list">${project.documents.map((doc, index) => `<a class="document-link" href="${encodeURI(doc.href)}" target="_blank" rel="noopener noreferrer"><span>${String(index + 1).padStart(2, "0")}</span><strong>${doc.title}</strong><em>View PDF ↗</em></a>`).join("")}</div>`
     : "";
 
-  dialogContent.innerHTML = `${hero}<div class="dialog-body"><p class="eyebrow">${project.sector}</p><h2 class="dialog-title">${project.title}</h2><div class="dialog-meta"><div><span>Location</span><strong>${project.location}</strong></div><div><span>Role</span><strong>${project.role}</strong></div><div><span>Status</span><strong>${project.status}</strong></div><div><span>Portfolio</span><strong>${project.drawingGroups?.length ? "LOD 400 · Selected Samples" : "Revit · Perspective · Drawings"}</strong></div></div>${factMarkup(project)}<div class="dialog-copy">${project.description.map(paragraph => `<p>${paragraph}</p>`).join("")}</div><div class="dialog-tags">${project.scope.map(item => `<span>${item}</span>`).join("")}</div>${media}${documents}${drawingGroupsMarkup(project)}</div>`;
+  const portfolio = project.portfolioLabel || (project.drawingGroups?.length ? "Selected Samples" : "Revit · Perspective · Drawings");
+  dialogContent.innerHTML = `${hero}<div class="dialog-body"><p class="eyebrow">${project.sector}</p><h2 class="dialog-title">${project.title}</h2><div class="dialog-meta"><div><span>Location</span><strong>${project.location}</strong></div><div><span>Role</span><strong>${project.role}</strong></div><div><span>Status</span><strong>${project.status}</strong></div><div><span>Portfolio</span><strong>${portfolio}</strong></div></div>${factMarkup(project)}<div class="dialog-copy">${project.description.map(paragraph => `<p>${paragraph}</p>`).join("")}</div><div class="dialog-tags">${project.scope.map(item => `<span>${item}</span>`).join("")}</div>${media}${documents}${drawingGroupsMarkup(project)}</div>`;
   dialog.showModal();
 }
 
