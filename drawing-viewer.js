@@ -79,27 +79,30 @@
     const section = document.querySelector('#dialog-content .drawing-section');
     if (!section || section.dataset.viewerReady === '1') return;
     section.dataset.viewerReady = '1';
-    const note = section.querySelector('.drawing-note');
-    if (note) note.textContent = 'Selected sample sheets from the larger LOD 400 architectural package. Drawings open inside the portfolio viewer; original project PDFs are not exposed through the portfolio interface.';
 
     section.querySelectorAll('.drawing-groups article').forEach((article, groupIndex) => {
       const groupTitle = article.querySelector('h3')?.textContent.trim() || 'Selected Drawings';
       const links = [...article.querySelectorAll('li a')];
       const groupSheets = links.map(link => {
-        const title = link.querySelector('span')?.textContent.trim() || link.textContent.replace('View PDF ↗','').trim();
-        return { title, preview: PREVIEWS[title], groupTitle };
+        const title = link.querySelector('span')?.textContent.trim() || link.textContent.replace('View drawing ↗','').replace('View PDF ↗','').trim();
+        const preview = link.dataset.preview || PREVIEWS[title];
+        const drawingNo = link.dataset.drawingNo || '';
+        return { title, preview, drawingNo, groupTitle };
       }).filter(item => item.preview);
 
       links.forEach(link => {
-        const title = link.querySelector('span')?.textContent.trim() || link.textContent.replace('View PDF ↗','').trim();
-        const preview = PREVIEWS[title];
+        const title = link.querySelector('span')?.textContent.trim() || link.textContent.replace('View drawing ↗','').replace('View PDF ↗','').trim();
+        const preview = link.dataset.preview || PREVIEWS[title];
+        const drawingNo = link.dataset.drawingNo || '';
         if (!preview) return;
         const button = document.createElement('button');
         button.type = 'button';
         button.className = 'drawing-preview-link';
-        button.innerHTML = `<span class="drawing-preview-thumb"><img src="${safe(preview)}" alt="${title}" loading="lazy" draggable="false"></span><span class="drawing-preview-name">${title}</span><span class="drawing-preview-action">View drawing ↗</span>`;
+        button.innerHTML = `<span class="drawing-preview-thumb"><img src="${safe(preview)}" alt="${title}" loading="lazy" draggable="false"></span><span class="drawing-preview-name">${title}${drawingNo ? `<small>${drawingNo}</small>` : ''}</span><span class="drawing-preview-action">View drawing ↗</span>`;
         button.addEventListener('click', () => {
-          sheets = groupSheets; index = Math.max(0, groupSheets.findIndex(item => item.title === title)); openViewer();
+          sheets = groupSheets;
+          index = Math.max(0, groupSheets.findIndex(item => item.title === title && item.preview === preview));
+          openViewer();
         });
         link.replaceWith(button);
       });
@@ -113,7 +116,8 @@
   function render() {
     const s = sheets[index], v = document.querySelector('#drawing-viewer'); if (!s || !v) return;
     v.querySelector('#dv-image').src = safe(s.preview); v.querySelector('#dv-image').alt = s.title;
-    v.querySelector('#dv-group').textContent = s.groupTitle; v.querySelector('#dv-title').textContent = s.title;
+    v.querySelector('#dv-group').textContent = s.drawingNo ? `${s.groupTitle} · ${s.drawingNo}` : s.groupTitle;
+    v.querySelector('#dv-title').textContent = s.title;
     v.querySelector('#dv-count').textContent = `${index + 1} / ${sheets.length}`; reset();
   }
   function setScale(next) { scale = Math.min(4, Math.max(.6, next)); if (scale <= 1) { x = 0; y = 0; } applyTransform(); }
