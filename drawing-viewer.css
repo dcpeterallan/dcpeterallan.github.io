@@ -1,4 +1,4 @@
-/* NUPCO selected drawing gallery + in-page viewer */
+/* Selected architectural drawing gallery + in-page viewer */
 .drawing-section{margin-top:48px;padding-top:34px;border-top:1px solid var(--line)}
 .drawing-section .eyebrow{margin-bottom:12px}.drawing-note{max-width:780px;color:var(--muted);font-size:13px}
 .drawing-groups{display:grid;gap:18px;margin-top:24px}.drawing-groups article{padding:18px;border:1px solid var(--line);background:#efede6;min-width:0}
@@ -6,6 +6,7 @@
 .drawing-groups li{margin:0;padding:0;min-width:0}.drawing-preview-link{display:grid;grid-template-columns:110px minmax(0,1fr) max-content;gap:14px;align-items:center;width:100%;min-width:0;padding:10px;border:1px solid var(--line);background:var(--bg);text-align:left;cursor:pointer}
 .drawing-preview-link:hover{background:#fff}.drawing-preview-thumb{display:block;aspect-ratio:4/3;overflow:hidden;background:#fff;border:1px solid var(--line)}
 .drawing-preview-thumb img{width:100%;height:100%;object-fit:cover;display:block;user-select:none;-webkit-user-drag:none}.drawing-preview-name{display:block;min-width:0;font-size:11px;line-height:1.45;word-break:normal;overflow-wrap:normal;hyphens:none}
+.drawing-preview-name small{display:block;margin-top:4px;color:var(--muted);font-size:9px;font-weight:400;line-height:1.35;letter-spacing:.025em;white-space:normal}
 .drawing-preview-action{display:block;color:var(--muted);font-size:9px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
 .drawing-viewer-open{overflow:hidden}.drawing-viewer{position:fixed;inset:0;z-index:9999;display:none;grid-template-rows:auto 1fr auto;background:#151515;color:#f4f3ee}
 .drawing-viewer.open{display:grid}.dv-top,.dv-bottom{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 18px;background:#111;border-bottom:1px solid #343434}
@@ -17,4 +18,4 @@
 .dv-stage img{max-width:94%;max-height:calc(100vh - 126px);width:auto;height:auto;display:block;transform-origin:center center;transition:transform .08s linear;user-select:none;-webkit-user-drag:none;box-shadow:0 12px 40px rgba(0,0,0,.32)}
 .dv-bottom span{color:#aaa;font-size:10px;letter-spacing:.08em}.dv-bottom button{min-width:96px}.dv-bottom button:last-child{text-align:right}
 @media(max-width:900px){.drawing-groups{grid-template-columns:1fr}.drawing-preview-link{grid-template-columns:100px minmax(0,1fr) max-content}}
-@media(max-width:650px){.drawing-groups article{padding:12px}.drawing-preview-link{grid-template-columns:82px minmax(0,1fr);gap:10px}.drawing-preview-action{display:none}.drawing-preview-name{font-size:10px;overflow-wrap:anywhere}.dv-top{align-items:flex-start;flex-direction:column}.dv-tools{width:100%;justify-content:flex-start}.dv-stage img{max-width:98%;max-height:calc(100vh - 178px)}.dv-bottom{padding:10px}.dv-bottom button{min-width:auto}.dv-bottom span{font-size:9px}}
+@media(max-width:650px){.drawing-groups article{padding:12px}.drawing-preview-link{grid-template-columns:82px minmax(0,1fr);gap:10px}.drawing-preview-action{display:none}.drawing-preview-name{font-size:10px;overflow-wrap:anywhere}.drawing-preview-name small{font-size:8px}.dv-top{align-items:flex-start;flex-direction:column}.dv-tools{width:100%;justify-content:flex-start}.dv-stage img{max-width:98%;max-height:calc(100vh - 178px)}.dv-bottom{padding:10px}.dv-bottom button{min-width:auto}.dv-bottom span{font-size:9px}}
