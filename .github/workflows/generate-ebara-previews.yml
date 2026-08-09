@@ -1,0 +1,98 @@
+name: Generate EBARA selected drawing previews
+
+on:
+  push:
+    paths:
+      - '.github/workflows/generate-ebara-previews.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout portfolio
+        uses: actions/checkout@v4
+
+      - name: Install PDF rendering dependencies
+        run: python -m pip install --disable-pip-version-check pymupdf pillow
+
+      - name: Generate selected EBARA drawing images
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from urllib.request import urlretrieve
+          import fitz
+          from PIL import Image, ImageDraw, ImageFont
+          from io import BytesIO
+
+          source = Path('_ebara_source')
+          source.mkdir(exist_ok=True)
+          office_pdf = source / 'office.pdf'
+          production_pdf = source / 'production.pdf'
+
+          urlretrieve('https://raw.githubusercontent.com/dcpeterallan/Architectural-Portfolio/main/assets/projects/ebara-elliott/office-building-complete-architectural-drawings.pdf', office_pdf)
+          urlretrieve('https://raw.githubusercontent.com/dcpeterallan/Architectural-Portfolio/main/assets/projects/ebara-elliott/production-building-complete-architectural-drawings.pdf', production_pdf)
+
+          items = [
+              ('office', office_pdf, 3, 'Ground and First Floor Plan', 'GC-EB-SP-DRW-OFA-ARC-20001', 'ground-first-floor-plan.webp'),
+              ('office', office_pdf, 7, 'Building Elevations 01/02', 'GC-EB-SP-DRW-OFA-ARC-20007', 'building-elevations-01-02.webp'),
+              ('office', office_pdf, 9, 'Building Sections', 'GC-EB-SP-DRW-OFA-ARC-20009', 'building-sections.webp'),
+              ('office', office_pdf, 13, 'Wall Sections', 'GC-EB-SP-DRW-OFA-ARC-20013', 'wall-sections.webp'),
+              ('production', production_pdf, 5, 'Equipment Layout Plan', 'GC-EB-SP-DRW-PDB-ARC-10004', 'equipment-layout-plan.webp'),
+              ('production', production_pdf, 6, 'Building Elevation 1/2', 'GC-EB-SP-DRW-PDB-ARC-10005', 'building-elevation-1-2.webp'),
+              ('production', production_pdf, 8, 'Building Section', 'GC-EB-SP-DRW-PDB-ARC-10007', 'building-section.webp'),
+              ('production', production_pdf, 9, 'Wall Sections', 'GC-EB-SP-DRW-PDB-ARC-10008', 'wall-sections.webp'),
+          ]
+
+          output_root = Path('assets/projects/ebara-elliott/drawing-preview')
+          font_path = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
+          bold_path = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
+          font = ImageFont.truetype(font_path, 18)
+          bold = ImageFont.truetype(bold_path, 18)
+
+          for category, pdf_path, page_no, title, drawing_no, filename in items:
+              out_dir = output_root / category
+              out_dir.mkdir(parents=True, exist_ok=True)
+              doc = fitz.open(pdf_path)
+              page = doc[page_no - 1]
+              pix = page.get_pixmap(matrix=fitz.Matrix(1.25, 1.25), alpha=False)
+              image = Image.open(BytesIO(pix.tobytes('ppm'))).convert('RGB')
+              max_width = 1800
+              if image.width > max_width:
+                  image = image.resize((max_width, round(image.height * max_width / image.width)), Image.Resampling.LANCZOS)
+
+              band = 52
+              canvas = Image.new('RGB', (image.width, image.height + band), 'white')
+              canvas.paste(image, (0, 0))
+              draw = ImageDraw.Draw(canvas)
+              draw.rectangle((0, image.height, image.width, image.height + band), fill=(248, 248, 248))
+              draw.text((18, image.height + 16), 'SELECTED PORTFOLIO SAMPLE - PETER ALLAN DELA COSTA', fill=(80, 80, 80), font=bold)
+
+              right = f'{drawing_no}  |  {title}'
+              box = draw.textbbox((0, 0), right, font=font)
+              right_width = box[2] - box[0]
+              if right_width > image.width * 0.48:
+                  right = drawing_no
+                  box = draw.textbbox((0, 0), right, font=font)
+                  right_width = box[2] - box[0]
+              draw.text((image.width - right_width - 18, image.height + 16), right, fill=(110, 110, 110), font=font)
+
+              canvas.save(out_dir / filename, 'WEBP', quality=78, method=6)
+              doc.close()
+          PY
+
+      - name: Commit generated selected previews
+        run: |
+          rm -rf _ebara_source
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/projects/ebara-elliott/drawing-preview
+          if git diff --cached --quiet; then
+            echo 'No preview changes to commit.'
+          else
+            git commit -m 'Add selected EBARA drawing previews'
+            git push
+          fi
