@@ -27,6 +27,7 @@ const recentProjects = [
     location: "Asir, Saudi Arabia",
     role: "Lead Architect / BIM Coordinator",
     status: "LOD 400",
+    thumbnail: "assets/projects/nupco/perspective.jpg",
     description: [
       "NUPCO Pharmaceutical Warehouse and Office is a strategic logistics and pharmaceutical development located within the new MODON Industrial Park in Asir, Saudi Arabia. The project is intended to serve as a benchmark for pharmaceutical warehouse facilities in the Kingdom while reflecting NUPCO’s corporate identity, operational requirements, and organizational culture.",
       "The development occupies a plot measuring approximately 547 m × 200 m, with an overall site area of approximately 95,698 m². The complex includes the main pharmaceutical warehouse, associated office spaces, meeting rooms, common areas, infrastructure and utility connections, covered staff parking, internal roads, guardhouses, and landscaped areas.",
@@ -39,15 +40,60 @@ const recentProjects = [
       ["Plot", "Approx. 547 m × 200 m"],
       ["Project Stage", "LOD 400"]
     ],
-    visualNote: "Perspective, Revit, and Navisworks screenshots have been selected for this project presentation and will be linked as portfolio assets once uploaded to the repository.",
-    drawingGroups: [
-      { title: "Selected Floor Plans", sheets: ["RCC-NPC-ASR-ARC-DD-00017 - 02", "RCC-NPC-ASR-ARC-DD-00018 - 02", "RCC-NPC-ASR-ARC-DD-00035 - 02", "RCC-NPC-ASR-ARC-DD-00036 - 02", "RCC-NPC-ASR-ARC-DD-08001 - 00"] },
-      { title: "Selected Elevations", sheets: ["RCC-NPC-ASR-ARC-DD-00076 - 02", "RCC-NPC-ASR-ARC-DD-00077 - 02"] },
-      { title: "Selected Wall Sections", sheets: ["RCC-NPC-ASR-ARC-DD-01451 - 00", "RCC-NPC-ASR-ARC-DD-00143 - 01", "RCC-NPC-ASR-ARC-DD-00144 - 01", "RCC-NPC-ASR-ARC-DD-00145 - 01"] },
-      { title: "Selected Stair Plans & Sections", sheets: ["RCC-NPC-ASR-ARC-DD-00121 - 02", "RCC-NPC-ASR-ARC-DD-00122 - 02", "RCC-NPC-ASR-ARC-DD-00123 - 02", "RCC-NPC-ASR-ARC-DD-00124 - 02"] },
-      { title: "Selected Miscellaneous Details", sheets: ["RCC-NPC-ASR-ARC-DD-00007 - 02", "RCC-NPC-ASR-ARC-DD-00701 - 00", "RCC-NPC-ASR-ARC-DD-00702 - 00", "RCC-NPC-ASR-ARC-DD-00703 - 00"] }
+    media: [
+      { title: "Perspective / Overall BIM View", src: "assets/projects/nupco/perspective.jpg" },
+      { title: "Revit View 01", src: "assets/projects/nupco/revit-view-01.jpg" },
+      { title: "Revit View 02", src: "assets/projects/nupco/revit-view-02.jpg" },
+      { title: "Navisworks Coordination View 01", src: "assets/projects/nupco/navisworks-01.jpg" },
+      { title: "Navisworks Coordination View 02", src: "assets/projects/nupco/navisworks-02.jpg" },
+      { title: "Navisworks Coordination View 03", src: "assets/projects/nupco/navisworks-03.jpg" }
     ],
-    placeholder: "NUPCO LOD 400 project presentation"
+    drawingGroups: [
+      {
+        title: "Selected Floor Plans",
+        sheets: [
+          { title: "RCC-NPC-ASR-ARC-DD-00017 - 02", href: "assets/projects/nupco/drawings/floor-plans/RCC-NPC-ASR-ARC-DD-00017 - 02.pdf" },
+          { title: "RCC-NPC-ASR-ARC-DD-00018 - 02", href: "assets/projects/nupco/drawings/floor-plans/RCC-NPC-ASR-ARC-DD-00018 - 02.pdf" },
+          { title: "RCC-NPC-ASR-ARC-DD-00035 - 02", href: "assets/projects/nupco/drawings/floor-plans/RCC-NPC-ASR-ARC-DD-00035 - 02.pdf" },
+          { title: "RCC-NPC-ASR-ARC-DD-00036 - 02", href: "assets/projects/nupco/drawings/floor-plans/RCC-NPC-ASR-ARC-DD-00036 - 02.pdf" },
+          { title: "RCC-NPC-ASR-ARC-DD-08001 - 00", href: "assets/projects/nupco/drawings/floor-plans/RCC-NPC-ASR-ARC-DD-08001 - 00.pdf" }
+        ]
+      },
+      {
+        title: "Selected Elevations",
+        sheets: [
+          { title: "RCC-NPC-ASR-ARC-DD-00076 - 02", href: "assets/projects/nupco/drawings/elevations/RCC-NPC-ASR-ARC-DD-00076 - 02.pdf" },
+          { title: "RCC-NPC-ASR-ARC-DD-00077 - 02", href: "assets/projects/nupco/drawings/elevations/RCC-NPC-ASR-ARC-DD-00077 - 02.pdf" }
+        ]
+      },
+      {
+        title: "Selected Wall Sections",
+        sheets: [
+          { title: "RCC-NPC-ASR-ARC-DD-01451 - 00", href: "assets/projects/nupco/drawings/wall-sections/RCC-NPC-ASR-ARC-DD-01451 - 00.pdf" },
+          { title: "RCC-NPC-ASR-ARC-DD-00143 - 01", href: "assets/projects/nupco/drawings/wall-sections/RCC-NPC-ASR-ARC-DD-00143 - 01.pdf" },
+          { title: "RCC-NPC-ASR-ARC-DD-00144 - 01", href: "assets/projects/nupco/drawings/wall-sections/RCC-NPC-ASR-ARC-DD-00144 - 01.pdf" },
+          { title: "RCC-NPC-ASR-ARC-DD-00145 - 01", href: "assets/projects/nupco/drawings/wall-sections/RCC-NPC-ASR-ARC-DD-00145 - 01.pdf" }
+        ]
+      },
+      {
+        title: "Selected Stair Plans & Sections",
+        sheets: [
+          { title: "RCC-NPC-ASR-ARC-DD-00121 - 02", href: "assets/projects/nupco/drawings/stair-plans-sections/RCC-NPC-ASR-ARC-DD-00121 - 02.pdf" },
+          { title: "RCC-NPC-ASR-ARC-DD-00122 - 02", href: "assets/projects/nupco/drawings/stair-plans-sections/RCC-NPC-ASR-ARC-DD-00122 - 02.pdf" },
+          { title: "RCC-NPC-ASR-ARC-DD-00123 - 02", href: "assets/projects/nupco/drawings/stair-plans-sections/RCC-NPC-ASR-ARC-DD-00123 - 02.pdf" },
+          { title: "RCC-NPC-ASR-ARC-DD-00124 - 02", href: "assets/projects/nupco/drawings/stair-plans-sections/RCC-NPC-ASR-ARC-DD-00124 - 02.pdf" }
+        ]
+      },
+      {
+        title: "Selected Miscellaneous Details",
+        sheets: [
+          { title: "RCC-NPC-ASR-ARC-DD-00007 - 02", href: "assets/projects/nupco/drawings/miscellaneous-details/RCC-NPC-ASR-ARC-DD-00007 - 02.pdf" },
+          { title: "RCC-NPC-ASR-ARC-DD-00701 - 00", href: "assets/projects/nupco/drawings/miscellaneous-details/RCC-NPC-ASR-ARC-DD-00701 - 00.pdf" },
+          { title: "RCC-NPC-ASR-ARC-DD-00702 - 00", href: "assets/projects/nupco/drawings/miscellaneous-details/RCC-NPC-ASR-ARC-DD-00702 - 00.pdf" },
+          { title: "RCC-NPC-ASR-ARC-DD-00703 - 00", href: "assets/projects/nupco/drawings/miscellaneous-details/RCC-NPC-ASR-ARC-DD-00703 - 00.pdf" }
+        ]
+      }
+    ]
   }
 ];
 
@@ -75,7 +121,7 @@ const dialogContent = document.querySelector("#dialog-content");
 
 function visualMarkup(project, className = "project-media") {
   if (project.thumbnail) {
-    return `<div class="${className}"><img class="project-image" src="${project.thumbnail}" alt="${project.title} perspective"></div>`;
+    return `<div class="${className}"><img class="project-image" src="${encodeURI(project.thumbnail)}" alt="${project.title} perspective"></div>`;
   }
   return `<div class="${className}"><div class="visual-placeholder"><span>${project.placeholder}</span></div></div>`;
 }
@@ -97,18 +143,18 @@ function factMarkup(project) {
 
 function drawingGroupsMarkup(project) {
   if (!project.drawingGroups?.length) return "";
-  return `<section class="drawing-section"><p class="eyebrow">Selected architectural drawings</p><p class="drawing-note">Selected sample sheets from the larger LOD 400 architectural drawing package. These are representative portfolio excerpts and are not presented as the complete project drawing set.</p><div class="drawing-groups">${project.drawingGroups.map(group => `<article><h3>${group.title}</h3><ul>${group.sheets.map(sheet => `<li>${sheet}</li>`).join("")}</ul></article>`).join("")}</div></section>`;
+  return `<section class="drawing-section"><p class="eyebrow">Selected architectural drawings</p><p class="drawing-note">Selected sample sheets from the larger LOD 400 architectural drawing package. These are representative portfolio excerpts and are not presented as the complete project drawing set.</p><div class="drawing-groups">${project.drawingGroups.map(group => `<article><h3>${group.title}</h3><ul>${group.sheets.map(sheet => `<li><a href="${encodeURI(sheet.href)}" target="_blank" rel="noopener noreferrer"><span>${sheet.title}</span><em>View PDF ↗</em></a></li>`).join("")}</ul></article>`).join("")}</div></section>`;
 }
 
 function openProject(project) {
   const hero = project.thumbnail
-    ? `<div class="dialog-hero"><img src="${project.thumbnail}" alt="${project.title} perspective"></div>`
+    ? `<div class="dialog-hero"><img src="${encodeURI(project.thumbnail)}" alt="${project.title} perspective"></div>`
     : `<div class="dialog-hero"><div class="visual-placeholder"><span>${project.placeholder}</span></div></div>`;
   const media = project.media?.length
-    ? `<div class="deliverables">${project.media.map(item => `<article class="deliverable-card"><div class="deliverable-media"><img src="${item.src}" alt="${project.title} ${item.title}"></div><h3>${item.title}</h3></article>`).join("")}</div>`
+    ? `<div class="deliverables">${project.media.map(item => `<article class="deliverable-card"><div class="deliverable-media"><img src="${encodeURI(item.src)}" alt="${project.title} ${item.title}"></div><h3>${item.title}</h3></article>`).join("")}</div>`
     : project.visualNote ? `<p class="asset-note">${project.visualNote}</p>` : "";
   const documents = project.documents?.length
-    ? `<div class="document-list">${project.documents.map((doc, index) => `<a class="document-link" href="${doc.href}" target="_blank" rel="noopener noreferrer"><span>${String(index + 1).padStart(2, "0")}</span><strong>${doc.title}</strong><em>View PDF ↗</em></a>`).join("")}</div>`
+    ? `<div class="document-list">${project.documents.map((doc, index) => `<a class="document-link" href="${encodeURI(doc.href)}" target="_blank" rel="noopener noreferrer"><span>${String(index + 1).padStart(2, "0")}</span><strong>${doc.title}</strong><em>View PDF ↗</em></a>`).join("")}</div>`
     : "";
 
   dialogContent.innerHTML = `${hero}<div class="dialog-body"><p class="eyebrow">${project.sector}</p><h2 class="dialog-title">${project.title}</h2><div class="dialog-meta"><div><span>Location</span><strong>${project.location}</strong></div><div><span>Role</span><strong>${project.role}</strong></div><div><span>Status</span><strong>${project.status}</strong></div><div><span>Portfolio</span><strong>${project.drawingGroups?.length ? "LOD 400 · Selected Samples" : "Revit · Perspective · Drawings"}</strong></div></div>${factMarkup(project)}<div class="dialog-copy">${project.description.map(paragraph => `<p>${paragraph}</p>`).join("")}</div><div class="dialog-tags">${project.scope.map(item => `<span>${item}</span>`).join("")}</div>${media}${documents}${drawingGroupsMarkup(project)}</div>`;
